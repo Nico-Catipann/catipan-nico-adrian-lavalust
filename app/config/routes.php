@@ -47,5 +47,4 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 // Standard Home Route
 $router->get('/student', 'StudentController::index');
 
-// Protected Profile Route using the chained ->middleware() method
 $router->get('/student/profile', 'StudentController::profile')->middleware('student_auth');
