@@ -41,9 +41,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 | Used for adding middlewares
 |
 */
-$config['middlewares'] = [];
-
 $config['middlewares'] = array(
     'student_auth' => load_class('StudentMiddleware', 'middlewares'),
+    'product_auth' => load_class('LoginMiddleware', 'middlewares'),
 );
 

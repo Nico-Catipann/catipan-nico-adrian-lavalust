@@ -49,3 +49,31 @@ $router->get('/student/profile', 'StudentController::profile')->middleware('stud
 
 
 $router->get('/users', 'UsersController::index');
+
+
+// ===============================
+// LOGIN / AUTHENTICATION
+// ===============================
+
+$router->get('/login', 'LoginController::index');
+
+$router->post('/login/authenticate', 'LoginController::authenticate');
+
+$router->get('/logout', 'LoginController::logout');
+
+
+// ===============================
+// PRODUCT CRUD
+// ===============================
+
+$router->get('/products', 'ProductController::index')
+       ->middleware('product_auth');
+
+$router->any('/products/store', 'ProductController::store')
+       ->middleware('product_auth');
+
+$router->any('/products/update/{id}', 'ProductController::update')
+       ->middleware('product_auth');
+
+$router->any('/products/delete/{id}', 'ProductController::delete')
+       ->middleware('product_auth');
