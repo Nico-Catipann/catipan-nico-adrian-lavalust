@@ -1,0 +1,62 @@
+<?php
+
+class Create_products_table {
+
+    private $_lava;
+    protected $dbforge;
+
+    public function __construct()
+    {
+        $this->_lava = lava_instance();
+        $this->_lava->call->dbforge();
+    }
+
+    public function up()
+    {
+        // Do not recreate the table if it already exists
+        if ($this->_lava->dbforge->table_exists('products')) {
+            return;
+        }
+
+        $this->_lava->dbforge->add_field([
+            'id' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'auto_increment' => TRUE
+            ],
+
+            'product_name' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100
+            ],
+
+            'description' => [
+                'type' => 'TEXT'
+            ],
+
+            'price' => [
+                'type'       => 'DECIMAL',
+                'constraint' => '10,2'
+            ],
+
+            'quantity' => [
+                'type'       => 'INT',
+                'constraint' => 11
+            ],
+
+            'created_at' => [
+                'type'    => 'TIMESTAMP',
+                'default' => 'CURRENT_TIMESTAMP'
+            ]
+        ]);
+
+        $this->_lava->dbforge->add_key('id', TRUE);
+
+        $this->_lava->dbforge->create_table('products');
+    }
+
+    public function down()
+    {
+        $this->_lava->dbforge->drop_table('products');
+    }
+}

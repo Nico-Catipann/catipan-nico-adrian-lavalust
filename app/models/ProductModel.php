@@ -9,7 +9,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 class ProductModel extends Model {
     protected $table = 'products';
     protected $primary_key = 'id';
-    protected $fillable = [];
+    protected $fillable = [
+         'product_name',
+        'description',
+        'price',
+        'quantity',
+        'product_image'
+    ];
     protected $guarded = ['id'];
 
     public function __construct()
